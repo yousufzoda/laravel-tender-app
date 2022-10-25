@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\TenderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,11 +15,13 @@ use App\Http\Controllers\Api\AuthController;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
+Route::resource('tenders', TenderController::class);
 
-Route::post('register',[AuthController::class,'register']);
-Route::post('login',[AuthController::class,'login']);
+Route::post('register',[AuthController::class,'registerUser']);
+Route::post('login',[AuthController::class,'loginUser']);
 Route::middleware('auth:api')->group(function(){
-    Route::get('user', [AuthController::class,'authenticated']);
+    Route::get('user', [AuthController::class,'authenticatedUser']);
+
 });
 
 //Route::middleware('auth:api')->get('/user', function (Request $request) {

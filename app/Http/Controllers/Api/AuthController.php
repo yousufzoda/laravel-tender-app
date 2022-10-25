@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    public function registerUser(Request $request){
         $this->validate($request,[
             'name'=>'required',
             'email'=>'required|email|unique:users',
@@ -23,14 +24,14 @@ class AuthController extends Controller
         return response()->json(['token'=>$access_token_example],200);
     }
 
-    public function login(Request $request){
+    public function loginUser(Request $request){
         $login_credentials=[
             'email'=>$request->email,
             'password'=>$request->password,
         ];
         if(auth()->attempt($login_credentials)){
 
-            $user_login_token= auth()->user()->createToken('PassportExample@Section.io')->accessToken;
+            $user_login_token= auth()->user()->createToken('MyApp')->accessToken;
             return response()->json(['token' => $user_login_token], 200);
         }
         else{
@@ -38,7 +39,7 @@ class AuthController extends Controller
         }
     }
 
-    public function authenticated(){
+    public function authenticatedUser(){
         return response()->json(['authenticated-user' => auth()->user()], 200);
     }
 }

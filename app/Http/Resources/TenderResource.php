@@ -20,6 +20,7 @@ class TenderResource extends JsonResource
             'number' => $this->number,
             'status' => $this->status,
             'name' => $this->name,
+            'date' => $this->date,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

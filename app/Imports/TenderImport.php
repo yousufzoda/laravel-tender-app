@@ -4,9 +4,13 @@ namespace App\Imports;
 
 use App\Models\Tender;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithCustomCsvSettings;
+use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 
-class TenderImport implements ToModel
+class TenderImport implements ToModel, WithHeadingRow
 {
+
     /**
     * @param array $row
     *
@@ -15,11 +19,11 @@ class TenderImport implements ToModel
     public function model(array $row)
     {
         return new Tender([
-            "external_code" => $row['Внешний код'],
-            "number" => $row['Номер'],
-            "status" => $row['Статус'],
-            "name" => $row['Название'],
-            "updated_at" => $row['Дата изм.'],
+            "external_code" => $row[0] ?? 'Null',
+            "number" => $row[1],
+            "status" => $row[2],
+            "name" => $row[3],
+            "change_date" => $row[4],
         ]);
     }
 }

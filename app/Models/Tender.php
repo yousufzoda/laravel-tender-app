@@ -9,5 +9,5 @@ class Tender extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['external_code', 'number', 'status', 'name'];
+    protected $guarded = [];
 }

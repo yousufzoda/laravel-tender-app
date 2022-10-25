@@ -19,6 +19,7 @@ class CreateTendersTable extends Migration
             $table->string('number');
             $table->string('status');
             $table->text('name');
+            $table->text('date');
             $table->timestamps();
         });
     }
